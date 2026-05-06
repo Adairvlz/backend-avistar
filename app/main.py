@@ -1,5 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
+from fastapi import Request
 
 from app.database import Base
 from app.database import engine
@@ -23,6 +26,19 @@ app.add_middleware(
 )
 
 app.include_router(series.router)
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(
+    request: Request,
+    exc: RequestValidationError
+):
+    return JSONResponse(
+        status_code=400,
+        content={
+            "error": "Datos inválidos",
+            "details": exc.errors()
+        }
+    )
 
 @app.get("/")
 def home():

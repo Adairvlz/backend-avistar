@@ -1,13 +1,13 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 
 class SeriesBase(BaseModel):
-    name: str
-    location: str
-    description: str
-    price_per_night: float
-    capacity: int
+    name: str = Field(..., min_length=3, max_length=100)
+    location: str = Field(..., min_length=3, max_length=100)
+    description: str = Field(..., min_length=10, max_length=500)
+    price_per_night: float = Field(..., gt=0)
+    capacity: int = Field(..., gt=0, le=30)
     image_url: Optional[str] = None
     available: bool = True
 
