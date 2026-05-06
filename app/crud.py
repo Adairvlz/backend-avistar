@@ -2,8 +2,37 @@ from sqlalchemy.orm import Session
 from app import models, schemas
 
 
-def get_all_series(db: Session):
-    return db.query(models.Series).all()
+def get_all_series(
+    db: Session,
+    page: int = 1,
+    limit: int = 10,
+    q: str = None,
+    sort: str = "id",
+    order: str = "asc"
+):
+
+    query = db.query(models.Series)
+
+    # búsqueda
+    if q:
+        query = query.filter(
+            models.Series.name.ilike(f"%{q}%")
+        )
+
+    # ordenamiento
+    column = getattr(models.Series, sort, models.Series.id)
+
+    if order == "desc":
+        query = query.order_by(column.desc())
+    else:
+        query = query.order_by(column.asc())
+
+    # paginación
+    offset = (page - 1) * limit
+
+    query = query.offset(offset).limit(limit)
+
+    return query.all()
 
 
 def get_series_by_id(db: Session, series_id: int):

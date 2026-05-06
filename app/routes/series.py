@@ -16,8 +16,23 @@ router = APIRouter(
 
 
 @router.get("/")
-def get_series(db: Session = Depends(get_db)):
-    return crud.get_all_series(db)
+def get_series(
+    page: int = 1,
+    limit: int = 10,
+    q: str = None,
+    sort: str = "id",
+    order: str = "asc",
+    db: Session = Depends(get_db)
+):
+
+    return crud.get_all_series(
+        db,
+        page,
+        limit,
+        q,
+        sort,
+        order
+    )
 
 
 @router.get("/{series_id}")
