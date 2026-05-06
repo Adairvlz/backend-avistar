@@ -25,3 +25,38 @@ def create_series(db: Session, series: schemas.SeriesCreate):
     db.refresh(new_series)
 
     return new_series
+
+
+def update_series(
+    db: Session,
+    series_id: int,
+    updated_data: schemas.SeriesCreate
+):
+
+    series = get_series_by_id(db, series_id)
+
+    if not series:
+        return None
+
+    for key, value in updated_data.model_dump().items():
+        setattr(series, key, value)
+
+    db.commit()
+
+    db.refresh(series)
+
+    return series
+
+
+def delete_series(db: Session, series_id: int):
+
+    series = get_series_by_id(db, series_id)
+
+    if not series:
+        return None
+
+    db.delete(series)
+
+    db.commit()
+
+    return series
