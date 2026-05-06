@@ -8,6 +8,7 @@ from app.database import Base
 from app.database import engine
 
 from app.routes import series
+from app.routes import ratings
 
 Base.metadata.create_all(bind=engine)
 
@@ -26,6 +27,7 @@ app.add_middleware(
 )
 
 app.include_router(series.router)
+app.include_router(ratings.router)
 
 @app.exception_handler(RequestValidationError)
 async def validation_exception_handler(

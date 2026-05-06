@@ -89,3 +89,32 @@ def delete_series(db: Session, series_id: int):
     db.commit()
 
     return series
+
+def create_rating(
+    db: Session,
+    series_id: int,
+    rating_data: schemas.RatingCreate
+):
+
+    new_rating = models.Rating(
+        series_id=series_id,
+        **rating_data.model_dump()
+    )
+
+    db.add(new_rating)
+
+    db.commit()
+
+    db.refresh(new_rating)
+
+    return new_rating
+
+
+def get_ratings_by_series(
+    db: Session,
+    series_id: int
+):
+
+    return db.query(models.Rating).filter(
+        models.Rating.series_id == series_id
+    ).all()

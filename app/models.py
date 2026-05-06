@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from app.database import Base
+from sqlalchemy import ForeignKey
+from sqlalchemy.orm import relationship
 
 class Series(Base):
     __tablename__ = "series"
@@ -19,3 +21,17 @@ class Series(Base):
     image_url = Column(String, nullable=True)
 
     available = Column(Boolean, default=True)
+
+class Rating(Base):
+    __tablename__ = "ratings"
+
+    id = Column(Integer, primary_key=True, index=True)
+
+    series_id = Column(
+        Integer,
+        ForeignKey("series.id", ondelete="CASCADE")
+    )
+
+    score = Column(Integer, nullable=False)
+
+    comment = Column(String, nullable=True)

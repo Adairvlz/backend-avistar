@@ -21,3 +21,15 @@ class SeriesResponse(SeriesBase):
 
     class Config:
         from_attributes = True
+
+class RatingCreate(BaseModel):
+    score: int = Field(..., ge=1, le=5)
+    comment: Optional[str] = None
+
+
+class RatingResponse(RatingCreate):
+    id: int
+    series_id: int
+
+    class Config:
+        from_attributes = True
