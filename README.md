@@ -1,72 +1,208 @@
-# Avistar - Backend (FastAPI)
+# README — AVISTAR Backend
 
-Este repositorio (o carpeta) contiene la API del proyecto **Avistar**, desarrollada con **FastAPI (Python)** y utilizando una base de datos **PostgreSQL**.
+## AVISTAR API
 
-## 🚀 Requisitos Previos
+Backend REST API para la plataforma AVISTAR, una aplicación full stack para gestionar hospedajes, casas y apartamentos.
 
-- [Docker](https://www.docker.com/products/docker-desktop)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-## 🛠️ Cómo Correr el Proyecto Completo
-
-Para que la aplicación funcione en su totalidad, necesitas levantar los servicios del backend (API y Base de Datos) y luego ejecutar el frontend.
-
-### 1. Configurar Variables de Entorno
-Asegúrate de tener un archivo `.env` en la raíz de esta carpeta (`backend-avistar/`). El archivo `docker-compose.yml` requiere este archivo para configurar las variables de entorno de la aplicación.
-
-### 2. Levantar el Backend y la Base de Datos
-Dentro de esta misma carpeta (`backend-avistar/`), ejecuta el siguiente comando para levantar la API y la base de datos PostgreSQL:
-
-```bash
-docker compose up -d
-```
-
-Esto iniciará:
-- **Base de Datos (PostgreSQL):** Disponible en el puerto `5428`.
-- **Backend API (FastAPI):** Disponible en el puerto `8010` (mapeado internamente al 8000).
-
-Puedes verificar que la API está corriendo accediendo a la documentación interactiva en tu navegador:
-- **🔗 Swagger UI:** [http://localhost:8010/docs](http://localhost:8010/docs)
-
-### 3. Levantar el Frontend
-Una vez que el backend esté corriendo, dirígete a la carpeta del frontend para iniciarlo:
-
-```bash
-cd ../frontend-avistar
-```
-
-Tienes dos opciones para correr el frontend:
-- **Opción A (Nativo):** Simplemente abre el archivo `index.html` en tu navegador web.
-- **Opción B (Usando Docker/Nginx):** 
-  ```bash
-  docker build -t avistar-frontend .
-  docker run -d -p 8080:80 avistar-frontend
-  ```
-  Y luego accede a [http://localhost:8080](http://localhost:8080) en tu navegador.
+La API fue desarrollada con FastAPI y PostgreSQL siguiendo una arquitectura REST separada del cliente.
 
 ---
 
-## 🗄️ Credenciales de Base de Datos (PostgreSQL)
+# Tecnologías utilizadas
 
-Si necesitas conectarte a la base de datos desde un cliente SQL (como pgAdmin, DBeaver, etc.), puedes usar las siguientes credenciales expuestas localmente:
+- FastAPI
+- PostgreSQL
+- SQLAlchemy
+- Docker
+- Docker Compose
+- Swagger / OpenAPI
+- Python 3.12
 
-- **Host:** `localhost`
-- **Puerto:** `5428`
-- **Usuario:** `avistar_user`
-- **Contraseña:** `avistar_password`
-- **Base de Datos:** `avistar_db`
+---
 
-## 💻 Desarrollo Local (Sin Docker para Python)
+# Características implementadas
 
-Si deseas correr la API localmente sin Docker:
-1. Crea un entorno virtual e instala las dependencias:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # En Windows: venv\Scripts\activate
-   pip install -r requirements.txt
-   ```
-2. Levanta la base de datos en Docker (`docker compose up db -d`).
-3. Ejecuta el servidor de desarrollo:
-   ```bash
-   uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-   ```
+## CRUD completo
+
+- GET `/series`
+- GET `/series/{id}`
+- POST `/series`
+- PUT `/series/{id}`
+- DELETE `/series/{id}`
+
+## Features adicionales
+
+- Paginación
+- Búsqueda por nombre
+- Ordenamiento
+- Validaciones server-side
+- Sistema de ratings
+- Exportación CSV desde frontend
+- Swagger UI
+- Persistencia en PostgreSQL
+- Manejo de errores HTTP
+- Soporte para imágenes
+
+---
+
+# Estructura del proyecto
+
+```txt
+app/
+├── main.py
+├── database.py
+├── models.py
+├── schemas.py
+├── crud.py
+└── routes/
+    ├── series.py
+    └── ratings.py
+```
+
+---
+
+# Backend en producción (Railway)
+
+## URL del backend
+
+```txt
+PEGAR_URL_BACKEND_AQUI
+```
+
+## Swagger UI
+
+```txt
+PEGAR_URL_BACKEND_AQUI/docs
+```
+
+## Cómo desplegar en Railway
+
+1. Subir el repositorio a GitHub.
+2. Crear un proyecto en Railway.
+3. Seleccionar "Deploy from GitHub Repo".
+4. Agregar un servicio PostgreSQL.
+5. Configurar la variable:
+
+```env
+DATABASE_URL=${{Postgres.DATABASE_URL}}
+```
+
+6. Railway detectará automáticamente el Dockerfile y realizará el deploy.
+
+---
+
+# Cómo correr el proyecto localmente
+
+## Requisitos
+
+- Docker Desktop
+- Git
+
+## 1. Clonar repositorio
+
+```bash
+git clone <LINK_BACKEND>
+cd avistar-backend
+```
+
+## 2. Levantar contenedores
+
+```bash
+docker compose up --build
+```
+
+---
+
+# Puertos utilizados
+
+## Backend
+
+```txt
+http://localhost:8010
+```
+
+## Swagger UI
+
+```txt
+http://localhost:8010/docs
+```
+
+## PostgreSQL
+
+```txt
+localhost:5428
+```
+
+---
+
+# Variables de entorno
+
+Archivo `.env`
+
+```env
+DATABASE_URL=postgresql://avistar_user:avistar_password@db:5432/avistar_db
+```
+
+---
+
+# ¿Qué es CORS?
+
+CORS es una política de seguridad del navegador que bloquea peticiones entre distintos orígenes. En este proyecto se configuró FastAPI para permitir conexiones desde el frontend mediante `CORSMiddleware`.
+
+---
+
+# Docker
+
+## Dockerfile
+
+El backend corre dentro de un contenedor Docker usando Python 3.12.
+
+## Docker Compose
+
+Se utiliza Docker Compose para levantar:
+
+- Backend FastAPI
+- PostgreSQL
+
+---
+
+# Challenges implementados
+
+- Swagger/OpenAPI
+- Swagger UI
+- Códigos HTTP correctos
+- Validaciones server-side
+- Paginación
+- Búsqueda por nombre
+- Ordenamiento ascendente y descendente
+- Sistema de ratings
+- Exportación CSV
+- Persistencia real con PostgreSQL
+- Frontend usando fetch() y JavaScript vanilla
+- Dockerización del backend y frontend
+
+---
+
+# Screenshots
+
+## Backend Swagger
+
+Agregar screenshot aquí.
+
+## Frontend funcionando
+
+Agregar screenshot aquí.
+
+## CRUD funcionando
+
+Agregar screenshot aquí.
+
+## Ratings funcionando
+
+Agregar screenshot aquí.
+
+---
+
+# Reflexión personal
+
+Escribir reflexión personal aquí.
