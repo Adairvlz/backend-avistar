@@ -187,19 +187,13 @@ Se utiliza Docker Compose para levantar:
 
 ## Backend Swagger
 
-Agregar screenshot aquí.
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/c6465c95-9f3d-48db-9f22-170fb2a1d349" />
+
 
 ## Frontend funcionando
 
-Agregar screenshot aquí.
-
-## CRUD funcionando
-
-Agregar screenshot aquí.
-
-## Ratings funcionando
-
-Agregar screenshot aquí.
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/fe37959c-e804-4377-af35-073450071938" />
+<img width="2880" height="1800" alt="image" src="https://github.com/user-attachments/assets/eb36b45b-fb31-48a2-bee1-25c6541fdf09" />
 
 ---
 
