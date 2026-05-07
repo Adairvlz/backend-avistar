@@ -8,6 +8,12 @@ La API fue desarrollada con FastAPI y PostgreSQL siguiendo una arquitectura REST
 
 ---
 
+# Repositorio del frontend
+
+```txt
+https://github.com/Adairvlz/frontend-avistar
+```
+
 # Tecnologías utilizadas
 
 - FastAPI
