@@ -199,4 +199,7 @@ Se utiliza Docker Compose para levantar:
 
 # Reflexión personal
 
-Escribir reflexión personal aquí.
+Utilizando las tecnologias de FastAPI si senti una gran diferencia a la hora de programar ya que python facilita muchisimo el entender el codigo y en modificarlo, pero lo que mas me gusto fue el Swagger que ofrece el framework que es increiblemente facil de usar, mucho mas que postman porque te dan los ejemplos de como subir los datos y ahi podias ver de una vez que todo funcionara de una vez.
+
+Si volveria a utilizar estas tecnologias, de hecho de todos los proyectos que habia hecho anteriormente, este fue el que mas se me facilito a la hora de corregir errores.
+
