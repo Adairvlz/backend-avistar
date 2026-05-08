@@ -72,16 +72,18 @@ app/
 ## URL del backend
 
 ```txt
-PEGAR_URL_BACKEND_AQUI
+backend-avistar-production.up.railway.app
 ```
 
 ## Swagger UI
 
 ```txt
-PEGAR_URL_BACKEND_AQUI/docs
+backend-avistar-production.up.railway.app/docs
 ```
 
 ## Cómo desplegar en Railway
+
+URL publica: https://adairvlz.github.io/frontend-avistar/
 
 1. Subir el repositorio a GitHub.
 2. Crear un proyecto en Railway.
@@ -107,7 +109,7 @@ DATABASE_URL=${{Postgres.DATABASE_URL}}
 ## 1. Clonar repositorio
 
 ```bash
-git clone <LINK_BACKEND>
+git clone <https://github.com/Adairvlz/backend-avistar>
 cd avistar-backend
 ```
 
